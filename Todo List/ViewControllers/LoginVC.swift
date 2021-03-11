@@ -9,14 +9,14 @@ import UIKit
 import CoreData
 
 class LoginVC: BaseController {
-
+    
     @IBOutlet weak var usernameTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        navigationController?.navigationBar.isHidden = true
     }
     
     @IBAction func OnTapLogin(_ sender: UIButton) {
@@ -28,29 +28,24 @@ class LoginVC: BaseController {
             showAlert(message:"Invalid Input")
             return
         }
-        do{
-            let fetchRequest:NSFetchRequest = User.fetchRequest()
-            let users = try context.fetch(fetchRequest)
-            if users.contains(where: {
-                $0.username == username && $0.password == password
-            }){
-                print("Login successful")
-            }else{
-                showAlert(message:"Wrong username or password")
-            }
-        }catch{
-            showAlert(message:"Fetching error")
+        
+        let users = getUsersFromContext()
+        if let user = users.first(where: {
+            $0.username == username && $0.password == password
+        }){
+            appDelegate.currentUser = user
+            goToMain()
+        }else{
+            showAlert(message:"Wrong username or password")
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func goToMain(){
+        performSegue(withIdentifier: "loginToMain", sender: nil)
     }
-    */
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is TodoListVC{
+            navigationController?.navigationBar.isHidden = false
+        }
+    }
 }

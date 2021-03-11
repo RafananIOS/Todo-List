@@ -8,25 +8,92 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Todos-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Todo_List" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Main" id="BYZ-38-t0r" customClass="TodoListVC" customModule="Todo_List" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dSr-y8-68E">
+                                <rect key="frame" x="8" y="52" width="398" height="802"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="dSr-y8-68E" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="1fo-Bd-WpC"/>
+                            <constraint firstItem="dSr-y8-68E" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="MF3-hL-7I8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="dSr-y8-68E" secondAttribute="bottom" constant="8" id="dtA-rI-a0J"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dSr-y8-68E" secondAttribute="trailing" constant="8" id="fIv-P6-Hne"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Todos" id="ork-Fg-BSj"/>
+                    <connections>
+                        <outlet property="tableView" destination="dSr-y8-68E" id="l8b-ar-y6F"/>
+                        <segue destination="NCj-CU-3bt" kind="presentation" identifier="todoListToAddTodo" id="TL4-0s-RkV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="133" y="117"/>
+            <point key="canvasLocation" x="158" y="122"/>
+        </scene>
+        <!--Add TodoVC-->
+        <scene sceneID="FwD-tJ-aBT">
+            <objects>
+                <viewController id="NCj-CU-3bt" customClass="AddTodoVC" customModule="Todo_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tns-Uz-ppe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3ju-Af-U1j">
+                                <rect key="frame" x="20" y="387" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Todo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sbu-aH-ir7">
+                                <rect key="frame" x="174" y="329" width="66" height="37"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yhh-Hy-qIP">
+                                <rect key="frame" x="182" y="443" width="50" height="46"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="touchAddButton:" destination="NCj-CU-3bt" eventType="touchUpInside" id="0c7-wE-4Xs"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="30l-si-Yfe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="yhh-Hy-qIP" firstAttribute="centerX" secondItem="30l-si-Yfe" secondAttribute="centerX" id="KJF-EY-cLr"/>
+                            <constraint firstItem="Sbu-aH-ir7" firstAttribute="centerX" secondItem="3ju-Af-U1j" secondAttribute="centerX" id="Q2h-tp-FVP"/>
+                            <constraint firstItem="yhh-Hy-qIP" firstAttribute="top" secondItem="3ju-Af-U1j" secondAttribute="bottom" constant="22" id="V9K-Qo-VS1"/>
+                            <constraint firstItem="3ju-Af-U1j" firstAttribute="centerY" secondItem="30l-si-Yfe" secondAttribute="centerY" id="c3T-gK-Piu"/>
+                            <constraint firstItem="3ju-Af-U1j" firstAttribute="top" secondItem="Sbu-aH-ir7" secondAttribute="bottom" constant="21" id="gEI-eD-3dy"/>
+                            <constraint firstItem="30l-si-Yfe" firstAttribute="trailing" secondItem="3ju-Af-U1j" secondAttribute="trailing" constant="20" id="rqL-Kw-ffM"/>
+                            <constraint firstItem="3ju-Af-U1j" firstAttribute="leading" secondItem="30l-si-Yfe" secondAttribute="leading" constant="20" id="uQ1-Nv-KGr"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="addTodoButton" destination="yhh-Hy-qIP" id="R1B-uG-Woe"/>
+                        <outlet property="todoInputText" destination="3ju-Af-U1j" id="6rW-Ps-rEY"/>
+                        <outlet property="todoLabel" destination="Sbu-aH-ir7" id="XvZ-HO-HlW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gsn-FH-JTO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="939.13043478260875" y="121.875"/>
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

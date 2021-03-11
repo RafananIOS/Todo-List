@@ -18,7 +18,6 @@ class RegisterVC: BaseController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
     }
     
@@ -34,26 +33,19 @@ class RegisterVC: BaseController {
         }
         
         //check for repeat username
-        let fetchRequest:NSFetchRequest = User.fetchRequest()
-        do{
-            let users = try context.fetch(fetchRequest)
-            let username = userTextField.text
-            if users.contains(where: {
-                $0.username == username
-            }){
-                showAlert(message: "Pick another username.")
-                return
-            }
-        }catch{
-            showAlert(message: "Error fetching")
-            return
+        var users = getUsersFromContext()
+        if !users.contains(where: {
+            $0.username == username
+        }){
+            //create new user
+            let newUser = User(username: username, password: password, todos: [String]())
+            users.append(newUser)
+            saveUsersToContext(users)
+            navigationController?.popViewController(animated: true)
+        }else{
+            showAlert(message: "Repeat Username")
         }
-        
-        //create new user
-        let newUser = User(context: context)
-        newUser.username = username
-        newUser.password = password
-        dismiss(animated: true)
+
     }
     
     /*
