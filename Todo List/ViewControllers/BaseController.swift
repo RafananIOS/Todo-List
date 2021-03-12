@@ -44,11 +44,10 @@ class BaseController: UIViewController {
     
     func getUsersFromContext() -> [User]{
         var users = [User]()
-        
         let store = fetchStoreFromContext()
-        
         guard let jsonObject = store.jsonObject else { return users }
         var json = [String:Any]()
+        
         do{
             let data = jsonObject as! Data
             json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
@@ -56,15 +55,16 @@ class BaseController: UIViewController {
             showAlert(message: "Error Parsing")
             return [User]()
         }
+        
         let usersJson:[[String:Any]] = ( json["users"] as? [[String : Any]] ) ?? [[String:Any]]()
-        print(usersJson.count)
+        
         for user in usersJson{
             let username = user["username"] as? String
             let password = user["password"] as? String
             let todos = user["todos"] as? [String]
             users.append(User(username: username, password: password, todos: todos))
         }
-        print("User contains")
+        
         return users
     }
     
