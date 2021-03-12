@@ -29,7 +29,7 @@ class LoginVC: BaseController {
             return
         }
         
-        let users = getUsersFromContext()
+        let users = getUsersFromJsonFile()
         if let user = users.first(where: {
             $0.username == username && $0.password == password
         }){

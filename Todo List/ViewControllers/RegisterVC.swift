@@ -34,14 +34,14 @@ class RegisterVC: BaseController {
         }
         
         //check for repeat username
-        var users = getUsersFromContext()
+        var users = getUsersFromJsonFile()
         if !users.contains(where: {
             $0.username == username
         }){
             //create new user
             let newUser = User(username: username, password: password, todos: [String]())
             users.append(newUser)
-            saveUsersToContext(users)
+            saveUsersToJsonFile(users)
             navigationController?.popViewController(animated: true)
         }else{
             showAlert(message: "Repeat Username")

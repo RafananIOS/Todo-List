@@ -30,6 +30,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dSr-y8-68E" secondAttribute="trailing" constant="8" id="fIv-P6-Hne"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="l5z-me-iQs"/>
                     <navigationItem key="navigationItem" title="Todos" id="ork-Fg-BSj"/>
                     <connections>
                         <outlet property="tableView" destination="dSr-y8-68E" id="l8b-ar-y6F"/>

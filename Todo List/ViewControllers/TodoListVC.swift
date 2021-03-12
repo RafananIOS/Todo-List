@@ -42,7 +42,7 @@ class TodoListVC: BaseController {
             addTodoVC.onComplete = { [self] todoString in
                 todos.append(todoString)
                 user.todos = todos
-                saveUsersToContext([user])
+                saveUsersToJsonFile([user])
                 tableView.reloadData()
             }
         }
