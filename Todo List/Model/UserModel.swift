@@ -8,6 +8,7 @@
 import Foundation
 
 struct User{
+    var name:String?
     var username:String?
     var password:String?
     var todos:[String]?
