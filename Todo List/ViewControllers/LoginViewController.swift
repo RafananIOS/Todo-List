@@ -39,7 +39,7 @@ class LoginViewController: BaseController {
         performSegue(withIdentifier: "loginToMain", sender: nil)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is TodoListVC{
+        if segue.destination is TodoListViewController{
             navigationController?.navigationBar.isHidden = false
         }
     }
